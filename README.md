@@ -18,55 +18,23 @@ Ce projet est un portfolio moderne et élégant construit avec Next.js.
 ## Installation
 
 1. Clonez ce dépôt :
-   \`\`\`
    git clone https://github.com/neyufx/portfolio.git
-   \`\`\`
 
 2. Naviguez dans le répertoire du projet :
-   \`\`\`
    cd portfolio
-   \`\`\`
+
 
 3. Installez les dépendances :
-   \`\`\`
-   npm install
-   # ou
+   npm install ou
    yarn install
-   \`\`\`
 
 ## Démarrage
 
 Pour lancer le serveur de développement :
-
-\`\`\`
-npm run dev
-# ou
+npm run dev ou
 yarn dev
-\`\`\`
 
 Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
-
-## Structure du projet
-
-\`\`\`
-portfolio-designer-nextjs/
-├── components/
-│   ├── hero.tsx
-│   └── sidebar.tsx
-├── hooks/
-│   └── useNavigation.ts
-├── pages/
-│   └── index.tsx
-├── public/
-│   └── ...
-├── styles/
-│   └── globals.css
-├── .gitignore
-├── next.config.js
-├── package.json
-├── README.md
-└── tsconfig.json
-\`\`\`
 
 ## Personnalisation
 
