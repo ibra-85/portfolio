@@ -1,6 +1,6 @@
-# Portfolio de Designer Next.js
+# Portfolio
 
-Ce projet est un portfolio de designer moderne et élégant construit avec Next.js.
+Ce projet est un portfolio moderne et élégant construit avec Next.js.
 
 ## Technologies utilisées
 
