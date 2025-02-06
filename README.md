@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio de Designer Next.js
 
-## Getting Started
+Ce projet est un portfolio de designer moderne et élégant construit avec Next.js.
 
-First, run the development server:
+## Technologies utilisées
 
-```bash
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+
+## Prérequis
+
+- Node.js (version 14 ou supérieure)
+- npm ou yarn
+
+## Installation
+
+1. Clonez ce dépôt :
+   \`\`\`
+   git clone https://github.com/neyufx/portfolio.git
+   \`\`\`
+
+2. Naviguez dans le répertoire du projet :
+   \`\`\`
+   cd portfolio
+   \`\`\`
+
+3. Installez les dépendances :
+   \`\`\`
+   npm install
+   # ou
+   yarn install
+   \`\`\`
+
+## Démarrage
+
+Pour lancer le serveur de développement :
+
+\`\`\`
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000) dans votre navigateur pour voir le résultat.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure du projet
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+\`\`\`
+portfolio-designer-nextjs/
+├── components/
+│   ├── hero.tsx
+│   └── sidebar.tsx
+├── hooks/
+│   └── useNavigation.ts
+├── pages/
+│   └── index.tsx
+├── public/
+│   └── ...
+├── styles/
+│   └── globals.css
+├── .gitignore
+├── next.config.js
+├── package.json
+├── README.md
+└── tsconfig.json
+\`\`\`
 
-## Learn More
+## Personnalisation
 
-To learn more about Next.js, take a look at the following resources:
+- Modifiez le contenu dans \`components/hero.tsx\` pour mettre à jour les informations de la page d'accueil.
+- Ajustez la navigation et les liens dans \`components/sidebar.tsx\`.
+- Personnalisez les styles dans \`styles/globals.css\` ou directement dans les composants en utilisant Tailwind CSS.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Déploiement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Ce projet peut être facilement déployé sur [Vercel](https://vercel.com/), la plateforme des créateurs de Next.js.
 
-## Deploy on Vercel
+Pour déployer votre projet sur Vercel :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Poussez votre code sur GitHub.
+2. Connectez-vous à Vercel et importez votre projet GitHub.
+3. Vercel détectera automatiquement que c'est un projet Next.js et configurera les paramètres de build pour vous.
+4. Cliquez sur "Deploy" et votre site sera en ligne en quelques minutes !
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
+
+## Licence
+
+Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
+
+Made with ❤️ by Neyu
