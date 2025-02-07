@@ -1,9 +1,15 @@
-import {Sidebar} from "@/components/sidebar";
+import { Sidebar } from "@/components/sidebar";
+import { Hero } from "@/components/hero";
+import {MobileNav} from "@/components/mobile-nav";
 
 export default function Home() {
   return (
-  <>
-    <Sidebar />
-  </>
+      <div className="flex flex-col lg:flex-row min-h-screen bg-[#141414]">
+          <Sidebar />
+          <MobileNav />
+        <main className="flex flex-col items-center flex-1 relative ml-0 lg:ml-64 max-lg:mt-24">
+          <Hero />
+        </main>
+      </div>
   );
 }
