@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { ImageProps } from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -52,20 +52,28 @@ export default function ZoomableImage({
 
     // Navigation
     const hasMany = all.length > 1;
-    const goPrev = () => setIdx((i) => (i - 1 + all.length) % all.length);
-    const goNext = () => setIdx((i) => (i + 1) % all.length);
 
-    // Fermeture avec ESC
+    const goPrev = useCallback(() => {
+        setIdx((i) => (i - 1 + all.length) % all.length);
+    }, [all.length]);
+
+    const goNext = useCallback(() => {
+        setIdx((i) => (i + 1) % all.length);
+    }, [all.length]);
+
+    // Fermeture & navigation clavier
     useEffect(() => {
         if (!isOpen) return;
+
         const onKey = (e: KeyboardEvent) => {
             if (e.key === "Escape") setOpen(false);
             if (e.key === "ArrowLeft" && hasMany) goPrev();
             if (e.key === "ArrowRight" && hasMany) goNext();
         };
+
         window.addEventListener("keydown", onKey);
         return () => window.removeEventListener("keydown", onKey);
-    }, [isOpen, hasMany]);
+    }, [isOpen, hasMany, goPrev, goNext]);
 
     return (
         <>

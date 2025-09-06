@@ -36,13 +36,13 @@ export function MobileNav() {
         <>
             <nav className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-[#141414] border-b border-white/5">
                 <div className="flex items-center justify-between p-4">
-                    <a href="/" className="flex items-center gap-3">
+                    <Link href="/" className="flex items-center gap-3">
                         <Image src="/logo.jpg" alt="Logo" width={40} height={40} className="rounded-[8px] w-10 h-10 object-cover" />
                         <div className="flex flex-col">
                             <h1 className={`${reenieBeanie.className} text-white text-xl leading-tight`}>Ibraguim</h1>
                             <span className="text-sm leading-none text-[#858585]">Développeur Web</span>
                         </div>
-                    </a>
+                    </Link>
                     <button onClick={toggleMenu} className="p-2">
                         {isOpen ? <X className="text-white/75" /> : <Menu className="text-white/75" />}
                     </button>

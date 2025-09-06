@@ -27,7 +27,7 @@ export function Sidebar() {
             className="hidden lg:block fixed inset-y-0 left-0 z-50 w-64 bg-[#161616] text-[#858585] border-r border-[#292929]"
         >
             <div className="flex flex-col h-full">
-                <a href="/" className="flex items-center gap-3 p-4">
+                <Link href="/" className="flex items-center gap-3 p-4">
                     <Image
                         src="/logo.jpg"
                         alt="Logo"
@@ -40,7 +40,7 @@ export function Sidebar() {
                         <h1 className={`${caveat.className} text-white text-2xl leading-tight`}>Ibraguim</h1>
                         <span className="text-sm leading-none">Développeur Web</span>
                     </div>
-                </a>
+                </Link>
                 <nav className="flex-1 overflow-y-auto">
                     <motion.ul
                         className="space-y-1 p-2"

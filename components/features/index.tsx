@@ -59,7 +59,7 @@ export function FeaturedWorks() {
         const id = setTimeout(checkScroll, 0);
         return () => {
             clearTimeout(id);
-            el.removeEventListener("scroll", onScroll as any);
+            el.removeEventListener("scroll", onScroll as EventListener);
             window.removeEventListener("resize", checkScroll);
         };
     }, [checkScroll]);

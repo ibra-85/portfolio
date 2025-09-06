@@ -167,7 +167,7 @@ export default function ProjectsPage() {
                             >
                                 <Search size={48} className="mx-auto mb-4 opacity-40 text-gray-400" aria-hidden />
                                 <p className="text-lg text-white">Aucun projet trouvé</p>
-                                <p className="text-sm text-gray-400">Essayez avec d'autres mots-clés</p>
+                                <p className="text-sm text-gray-400">Essayez avec d&apos;autres mots-clés</p>
                                 {q && (
                                     <button
                                         onClick={() => setQ("")}
