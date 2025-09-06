@@ -31,7 +31,12 @@ const technologies = [
         name: "Tailwind",
         logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/480px-Tailwind_CSS_Logo.svg.png",
     },
+    {
+        name: "Laravel",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/512px-Laravel.svg.png",
+    },
 ];
+
 
 const TechItem: React.FC<{ tech: (typeof technologies)[0] }> = ({ tech }) => (
     <div className="flex items-center gap-2 text-[#858585] min-w-max group px-3">
@@ -59,11 +64,11 @@ export function InfiniteCarousel() {
 
     // Mesure la largeur du premier cycle dès que le composant est monté
     useEffect(() => {
-        if (firstCycleRef.current) {
-            const width = firstCycleRef.current.getBoundingClientRect().width;
-            setCycleWidth(width);
-        }
-    }, [firstCycleRef.current]);
+    if (firstCycleRef.current) {
+        const width = firstCycleRef.current.getBoundingClientRect().width;
+        setCycleWidth(width);
+    }
+    }, []);
 
     useAnimationFrame((time) => {
         if (startTimeRef.current === null) {

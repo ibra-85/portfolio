@@ -47,7 +47,7 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="flex flex-col items-start gap-5 w-full max-w-[800px] min-h-min p-[40px_48px_40px] relative xl:border-x border-dashed border-white/10 text-white"
+            className="flex flex-col items-start gap-5 w-full max-w-[800px] min-h-min p-[40px_48px_40px] relative xl:border-x border-dashed border-[#292929] text-white"
         >
             {/* Background effects */}
             <StarryBackground />
@@ -87,7 +87,7 @@ export function Hero() {
                     className="h-auto max-w-[440px] relative whitespace-pre-wrap w-full break-words"
                 >
                     <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6 text-white">
-                        Je suis Neyu, je donne vie au web par ma{" "}
+                        Je suis Ibraguim, je donne vie au web par ma{" "}
                         <span className="text-[#858585]">créativité et mon expertise.</span>
                     </h1>
                 </motion.div>
@@ -104,7 +104,7 @@ export function Hero() {
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex transition duration-300 rounded-[8px] ease text-white/75 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
                     >
-                        📬<span className="font-semibold">Me contacter</span>
+                        📬<a href="mailto:ibraguimd@gmail.com" className="font-semibold">Me contacter</a>
                     </motion.button>
                     <motion.span
                         variants={itemVariants}

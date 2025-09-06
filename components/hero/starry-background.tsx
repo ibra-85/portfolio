@@ -35,7 +35,6 @@ export function StarryBackground() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    // Utiliser useMemo pour générer les données une seule fois (uniquement côté client)
     const stars = useMemo<Star[]>(
         () =>
             Array.from({ length: 50 }, (_, i) => ({

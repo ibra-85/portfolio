@@ -61,4 +61,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à
 
 Ce projet est sous licence [MIT](https://opensource.org/licenses/MIT).
 
-Made with ❤️ by Neyu
+Made with ❤️ by Ibraguim

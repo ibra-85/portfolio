@@ -1,6 +1,8 @@
 import { Sidebar } from "@/components/sidebar";
 import { Hero } from "@/components/hero";
 import {MobileNav} from "@/components/mobile-nav";
+import {FeaturedWorks} from "@/components/features";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -8,7 +10,9 @@ export default function Home() {
           <Sidebar />
           <MobileNav />
         <main className="flex flex-col items-center flex-1 relative ml-0 lg:ml-64 max-lg:mt-24">
-          <Hero />
+            <Hero />
+            <FeaturedWorks />
+            <Footer />
         </main>
       </div>
   );
