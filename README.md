@@ -4,7 +4,6 @@ Un portfolio moderne et minimaliste construit avec **Next.js**, **TypeScript** e
 
 ## ✨ Fonctionnalités
 - App Router (Next.js 13+)
-- Thème clair/sombre
 - Pages projets avec navigation par *slug*
 - Animations fluides (Framer Motion)
 - Icônes (lucide-react)
