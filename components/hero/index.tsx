@@ -1,20 +1,23 @@
 "use client"
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
-import { StarryBackground } from "./starry-background"
+import dynamic from "next/dynamic"
 import { InfiniteCarousel } from "./infinite-carousel"
 
+const StarryBackground = dynamic(
+    () => import("./starry-background").then((m) => m.StarryBackground),
+    { ssr: false }
+)
+
 export function Hero() {
-    const [currentTime, setCurrentTime] = useState(new Date())
+    const [currentTime, setCurrentTime] = useState<Date | null>(null)
 
     useEffect(() => {
+        setCurrentTime(new Date())
         const timer = setInterval(() => {
             setCurrentTime(new Date())
         }, 1000)
-
-        return () => {
-            clearInterval(timer)
-        }
+        return () => clearInterval(timer)
     }, [])
 
     const containerVariants = {
@@ -22,7 +25,7 @@ export function Hero() {
         visible: {
             opacity: 1,
             transition: {
-                delay: 0.6, // Délai légèrement plus long que celui de la page
+                delay: 0.6,
                 staggerChildren: 0.2,
                 delayChildren: 0.2,
             },
@@ -73,12 +76,12 @@ export function Hero() {
                         />
                         <div
                             className="absolute w-[10px] h-[10px] rounded-full bg-green-400"
-                            style={{
-                                boxShadow: "0 0 10px rgba(59, 130, 246, 0.5)",
-                            }}
+                            style={{ boxShadow: "0 0 10px rgba(59, 130, 246, 0.5)" }}
                         />
                     </div>
-                    <span className="text-sm text-white/60 max-md:text-xs max-md:font-semibold">Passionné par le développement web.</span>
+                    <span className="text-sm text-white/60 max-md:text-xs max-md:font-semibold">
+            Passionné par le développement web.
+          </span>
                 </motion.div>
 
                 {/* Hero text */}
@@ -92,32 +95,52 @@ export function Hero() {
                     </h1>
                 </motion.div>
 
-                <motion.p variants={itemVariants} className="text-lg text-[#858585] mb-8 max-w-xl">
-                    Je me spécialise dans la création de sites web modernes et réactifs, en utilisant les dernières technologies
-                    front-end et back-end.
+                <motion.p
+                    variants={itemVariants}
+                    className="text-lg text-[#858585] mb-8 max-w-xl"
+                >
+                    Je me spécialise dans la création de sites web modernes et réactifs,
+                    en utilisant les dernières technologies front-end et back-end.
                 </motion.p>
 
                 {/* CTA Section */}
-                <motion.div variants={itemVariants} className="flex items-center gap-6">
+                <motion.div
+                    variants={itemVariants}
+                    className="flex items-center gap-6"
+                >
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="inline-flex transition duration-300 rounded-[8px] ease text-white/75 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
                     >
-                        📬<a href="mailto:ibraguimd@gmail.com" className="font-semibold">Me contacter</a>
+                        📬
+                        <a
+                            href="mailto:ibraguimd@gmail.com"
+                            className="font-semibold"
+                        >
+                            Me contacter
+                        </a>
                     </motion.button>
                     <motion.span
                         variants={itemVariants}
                         className="text-white text-opacity-90 font-semibold"
                         style={{ textShadow: "0 0 15px rgba(255, 255, 255, 0.3)" }}
                     >
-                        {currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                        {currentTime
+                            ? currentTime.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })
+                            : " "}
                     </motion.span>
                 </motion.div>
 
                 {/* Technologies section with infinite carousel */}
                 <motion.div variants={itemVariants} className="mt-24 w-full">
-                    <motion.h2 variants={itemVariants} className="text-[#858585] text-sm mb-6 font-semibold">
+                    <motion.h2
+                        variants={itemVariants}
+                        className="text-[#858585] text-sm mb-6 font-semibold"
+                    >
                         Mes compétences
                     </motion.h2>
                     <InfiniteCarousel />

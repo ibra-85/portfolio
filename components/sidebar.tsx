@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Download, Home, LayoutGrid } from "lucide-react"
 import { motion } from "framer-motion"
+import {useEffect, useState} from "react";
 
 const caveat = Caveat({
     weight: "400",
@@ -18,6 +19,11 @@ const navItems = [
 
 export function Sidebar() {
     const pathname = usePathname();
+    const [dateStr, setDateStr] = useState<string>("");
+
+    useEffect(() => {
+        setDateStr(new Date().toLocaleDateString());
+    }, []);
 
     return (
         <motion.aside
@@ -68,7 +74,7 @@ export function Sidebar() {
                     <div className="bg-[#1A1A1A] rounded-xl p-4 relative border border-dashed border-[#333333] overflow-hidden">
                         <div className="relative z-10">
                             <div className="text-[22px] font-medium mb-0.5 text-white tracking-tight">
-                                {new Date().toLocaleDateString()}
+                                {dateStr || " "}
                             </div>
                             <div className="text-sm text-[#858585]">Vendée, France</div>
                         </div>

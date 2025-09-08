@@ -9,9 +9,11 @@ interface FooterProps {
 }
 
 const Footer = ({className}: FooterProps) => {
-  const [currentTime, setCurrentTime] = useState<string>("")
+  const [currentTime, setCurrentTime] = useState<string>("");
+  const [year, setYear] = useState<number | null>(null);
 
   useEffect(() => {
+      setYear(new Date().getFullYear());
     const updateTime = () => {
       const now = new Date()
       const timeString = now.toLocaleTimeString("fr-FR", {
@@ -27,8 +29,6 @@ const Footer = ({className}: FooterProps) => {
 
     return () => clearInterval(interval)
   }, [])
-
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className={cn(className, "bg-[#141414] text-gray-400 w-full py-12")}>
@@ -82,7 +82,7 @@ const Footer = ({className}: FooterProps) => {
         <div className="flex flex-wrap gap-2 text-sm justify-center">
           <span>Fait avec le ❤️ par Ibraguim</span>
           <span>|</span>
-          <span>© {currentYear} - Tous droits réservés</span>
+          <span>© {year ?? 2025} - Tous droits réservés</span>
         </div>
       </div>
     </footer>
