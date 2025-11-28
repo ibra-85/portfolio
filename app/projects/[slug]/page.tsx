@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Calendar, Image, } from "lucide-react";
+import { Calendar, Image as ImageIcon } from "lucide-react";
 
 import { Sidebar } from "@/components/sidebar";
 import { MobileNav } from "@/components/mobile-nav";
@@ -120,7 +120,7 @@ export default async function ProjectPage(
                                                 className="object-cover"
                                             />
                                             <div className="absolute top-10 right-4 bg-black/70 backdrop-blur-sm text-gray-300 px-2 py-1 rounded-[8px] text-sm font-medium flex items-center gap-1.5 pointer-events-none border border-white/10 shadow-lg">
-                                                <Image size={14} className="text-gray-400" aria-hidden="true" />
+                                                <ImageIcon size={14} className="text-gray-400" aria-hidden="true" />
                                                 <span>{section.images.length}</span>
                                             </div>
                                         </figure>

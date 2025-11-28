@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
 
 export function Breadcrumbs() {
     const pathname = usePathname();

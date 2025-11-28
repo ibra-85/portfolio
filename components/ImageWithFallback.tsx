@@ -43,20 +43,33 @@ export function ImageWithFallback({
         onLoad?.();
     };
 
-    const imageProps = {
-        src: imgSrc,
-        alt,
-        className: `${className} ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-300`,
-        onError: handleError,
-        onLoad: handleLoad,
-        priority,
-        sizes,
-    };
-
     if (fill) {
-        return <Image {...imageProps} fill />;
+        return (
+            <Image
+                src={imgSrc}
+                alt={alt}
+                fill
+                className={`${className} ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
+                onError={handleError}
+                onLoad={handleLoad}
+                priority={priority}
+                sizes={sizes}
+            />
+        );
     }
 
-    return <Image {...imageProps} width={width} height={height} />;
+    return (
+        <Image
+            src={imgSrc}
+            alt={alt}
+            width={width}
+            height={height}
+            className={`${className} ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-300`}
+            onError={handleError}
+            onLoad={handleLoad}
+            priority={priority}
+            sizes={sizes}
+        />
+    );
 }
 

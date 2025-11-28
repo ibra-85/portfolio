@@ -2,7 +2,6 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 export function BackButton() {

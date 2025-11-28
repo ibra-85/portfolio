@@ -191,7 +191,7 @@ export default function ZoomableImage({
                             {imageErrors.has(idx) ? (
                                 <div className="flex flex-col items-center justify-center h-full bg-black/20 rounded-xl">
                                     <AlertCircle className="w-12 h-12 text-gray-500 mb-4" aria-hidden="true" />
-                                    <p className="text-gray-400 text-sm">Impossible de charger l'image</p>
+                                    <p className="text-gray-400 text-sm">Impossible de charger l&apos;image</p>
                                 </div>
                             ) : (
                                 <Image
