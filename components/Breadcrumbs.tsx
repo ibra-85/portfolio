@@ -12,10 +12,10 @@ export function Breadcrumbs() {
 
     const paths = pathname.split("/").filter(Boolean);
     
-    const breadcrumbs = [
+    const breadcrumbs: Array<{ name: string; href: string; icon?: typeof Home }> = [
         { name: "Accueil", href: "/", icon: Home },
-        ...paths.map((path, index) => {
-            const href = "/" + paths.slice(0, index + 1).join("/");
+        ...paths.map((path) => {
+            const href = "/" + paths.slice(0, paths.indexOf(path) + 1).join("/");
             const name = path
                 .split("-")
                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -32,7 +32,7 @@ export function Breadcrumbs() {
                         {index > 0 && <ChevronRight size={14} className="text-gray-600" aria-hidden="true" />}
                         {index === breadcrumbs.length - 1 ? (
                             <span className="text-white font-medium" aria-current="page">
-                                {index === 0 && <crumb.icon size={16} className="inline mr-1" />}
+                                {crumb.icon && <crumb.icon size={16} className="inline mr-1" />}
                                 {crumb.name}
                             </span>
                         ) : (
@@ -41,7 +41,7 @@ export function Breadcrumbs() {
                                 prefetch={true}
                                 className="hover:text-white transition-colors flex items-center gap-1"
                             >
-                                {index === 0 && <crumb.icon size={16} />}
+                                {crumb.icon && <crumb.icon size={16} />}
                                 {crumb.name}
                             </Link>
                         )}
