@@ -1,10 +1,11 @@
 "use client";
 
 import Image, { ImageProps } from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { ZoomIn, ChevronLeft, ChevronRight, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ImageSkeleton } from "./ImageSkeleton";
 
 type Props = Omit<ImageProps, "src" | "alt"> & {
     /** Une seule image */
@@ -45,10 +46,67 @@ export default function ZoomableImage({
 
     const [isOpen, setOpen] = useState(false);
     const [idx, setIdx] = useState(startIndex);
+    const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+    const [isLoading, setIsLoading] = useState(true);
+    const modalRef = useRef<HTMLDivElement>(null);
+    const previousFocusRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
         setIdx(startIndex);
     }, [startIndex]);
+
+    // Focus trap pour l'accessibilité
+    useEffect(() => {
+        if (!isOpen) return;
+
+        // Sauvegarder l'élément qui avait le focus
+        previousFocusRef.current = document.activeElement as HTMLElement;
+
+        // Focus sur le modal
+        const modal = modalRef.current;
+        if (modal) {
+            const firstFocusable = modal.querySelector(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            ) as HTMLElement;
+            firstFocusable?.focus();
+        }
+
+        // Gérer le focus trap
+        const handleTab = (e: KeyboardEvent) => {
+            if (e.key !== "Tab") return;
+
+            const modal = modalRef.current;
+            if (!modal) return;
+
+            const focusableElements = modal.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0] as HTMLElement;
+            const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement?.focus();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement?.focus();
+                }
+            }
+        };
+
+        document.addEventListener("keydown", handleTab);
+        document.body.style.overflow = "hidden"; // Empêcher le scroll du body
+
+        return () => {
+            document.removeEventListener("keydown", handleTab);
+            document.body.style.overflow = "";
+            // Restaurer le focus
+            previousFocusRef.current?.focus();
+        };
+    }, [isOpen]);
 
     // Navigation
     const hasMany = all.length > 1;
@@ -79,14 +137,20 @@ export default function ZoomableImage({
         <>
             {/* Preview */}
             <div className="relative group">
+                {isLoading && <ImageSkeleton className={previewClassName} aspectRatio="video" />}
                 <Image
                     src={previewSrc}
                     alt={alt}
                     {...rest}
                     width={rest.width ?? 1920}
                     height={rest.height ?? 1080}
-                    className={`${previewClassName} group-hover:cursor-pointer ${rest.className ?? ""}`}
+                    className={`${previewClassName} group-hover:cursor-pointer ${rest.className ?? ""} ${isLoading ? "opacity-0 absolute" : "opacity-100"} transition-opacity duration-300`}
                     onClick={() => setOpen(true)}
+                    onLoad={() => setIsLoading(false)}
+                    onError={() => {
+                        setIsLoading(false);
+                        setImageErrors((prev) => new Set([...prev, 0]));
+                    }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <ZoomIn className="text-white w-12 h-12 bg-black/50 rounded-full p-3" />
@@ -94,19 +158,24 @@ export default function ZoomableImage({
             </div>
 
             {/* Overlay + (optionnel) Carousel */}
-            {isOpen && (
-                <motion.div
-                    className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-                    onClick={() => setOpen(false)}
-                    variants={overlayVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                >
-                    <div
-                        className="relative w-full max-w-5xl mx-auto px-4"
-                        onClick={(e) => e.stopPropagation()}
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+                        onClick={() => setOpen(false)}
+                        variants={overlayVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label="Vue agrandie de l'image"
                     >
+                        <div
+                            ref={modalRef}
+                            className="relative w-full max-w-5xl mx-auto px-4"
+                            onClick={(e) => e.stopPropagation()}
+                        >
                         {/* Bouton close */}
                         <button
                             onClick={() => setOpen(false)}
@@ -119,15 +188,25 @@ export default function ZoomableImage({
 
                         {/* Image courante */}
                         <div className="relative w-full aspect-video">
-                            <Image
-                                key={all[idx]} // force l’update
-                                src={all[idx]}
-                                alt={alt}
-                                fill
-                                sizes="100vw"
-                                className="object-contain rounded-xl bg-black/20"
-                                priority
-                            />
+                            {imageErrors.has(idx) ? (
+                                <div className="flex flex-col items-center justify-center h-full bg-black/20 rounded-xl">
+                                    <AlertCircle className="w-12 h-12 text-gray-500 mb-4" aria-hidden="true" />
+                                    <p className="text-gray-400 text-sm">Impossible de charger l'image</p>
+                                </div>
+                            ) : (
+                                <Image
+                                    key={all[idx]} // force l'update
+                                    src={all[idx]}
+                                    alt={alt}
+                                    fill
+                                    sizes="100vw"
+                                    className="object-contain rounded-xl bg-black/20"
+                                    priority
+                                    onError={() => {
+                                        setImageErrors((prev) => new Set([...prev, idx]));
+                                    }}
+                                />
+                            )}
                         </div>
 
                         {/* Contrôles du carousel */}
@@ -172,9 +251,10 @@ export default function ZoomableImage({
                                 </div>
                             </>
                         )}
-                    </div>
-                </motion.div>
-            )}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }

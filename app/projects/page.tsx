@@ -9,14 +9,36 @@ import { Search, Calendar, ArrowUpRight, X } from "lucide-react";
 import { Sidebar } from "@/components/sidebar";
 import { MobileNav } from "@/components/mobile-nav";
 import Footer from "@/components/Footer";
+import { StructuredData } from "@/components/StructuredData";
+import { ImageSkeleton } from "@/components/ImageSkeleton";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { getProjects, type Project, type ProjectSection } from "@/data/projects";
 import { filterProjects } from "@/lib/search"; // recherche centralisée
+import { validateSearchQuery } from "@/lib/validation";
 
 const allProjects: Project[] = getProjects();
 
 export default function ProjectsPage() {
+    useKeyboardShortcuts();
     const inputRef = useRef<HTMLInputElement>(null);
     const [q, setQ] = useState("");
+    const [imageLoadStates, setImageLoadStates] = useState<Record<string, boolean>>({});
+    const [searchError, setSearchError] = useState<string | null>(null);
+
+    // Validation et sanitization de la recherche
+    const handleSearchChange = (value: string) => {
+        const validation = validateSearchQuery(value);
+        if (validation.isValid) {
+            setQ(validation.sanitized);
+            setSearchError(null);
+        } else {
+            setQ(validation.sanitized);
+            setSearchError(validation.error || null);
+        }
+    };
 
     // debounce 250ms
     const [debouncedQ, setDebouncedQ] = useState(q);
@@ -41,16 +63,21 @@ export default function ProjectsPage() {
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-[#141414]">
+            <StructuredData type="website" projects={allProjects} />
             <Sidebar />
             <MobileNav />
 
-            <main className="flex flex-col items-center flex-1 relative ml-0 lg:ml-64 max-lg:mt-24">
+            <main id="main-content" className="flex flex-col items-center flex-1 relative ml-0 lg:ml-64 max-lg:mt-24">
+                <ScrollToTop />
                 <motion.div
                     initial="hidden"
                     animate="visible"
                     variants={containerVariants}
                     className="w-full max-w-6xl p-8 xl:border-x border-dashed border-[#ffffff14] "
                 >
+                    {/* Breadcrumbs */}
+                    <Breadcrumbs />
+                    
                     {/* Header */}
                     <motion.div variants={itemVariants} className="mb-8">
                         <h1 className="text-3xl font-bold text-white mb-2">Mes Projets</h1>
@@ -70,11 +97,19 @@ export default function ProjectsPage() {
                                 ref={inputRef}
                                 id="project-search"
                                 type="text"
-                                placeholder="Rechercher un projet..."
+                                placeholder="Rechercher un projet... (Appuyez sur /)"
                                 value={q}
-                                onChange={(e) => setQ(e.target.value)}
+                                onChange={(e) => handleSearchChange(e.target.value)}
+                                maxLength={100}
                                 className="w-full pl-10 pr-10 py-3 bg-[#1A1A1A] border border-[#333333] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-[#555555] transition-colors"
+                                aria-invalid={searchError ? "true" : "false"}
+                                aria-describedby={searchError ? "search-error" : undefined}
                             />
+                            {searchError && (
+                                <p id="search-error" className="mt-2 text-sm text-red-400" role="alert">
+                                    {searchError}
+                                </p>
+                            )}
                             {q && (
                                 <button
                                     aria-label="Effacer la recherche"
@@ -103,7 +138,7 @@ export default function ProjectsPage() {
                                 variants={containerVariants}
                                 className="grid grid-cols-1 md:grid-cols-2 gap-6"
                             >
-                                {filtered.map((project: Project) => {
+                                {filtered.map((project: Project, index: number) => {
                                     const firstImage =
                                         (project.sections.find((s: ProjectSection) => s.images)?.images?.[0] as string | undefined) ??
                                         "/placeholder.png";
@@ -111,16 +146,21 @@ export default function ProjectsPage() {
 
                                     return (
                                         <motion.article key={project.slug} variants={itemVariants} className="group">
-                                            <Link href={`/projects/${project.slug}`}>
+                                            <Link href={`/projects/${project.slug}`} prefetch={true}>
                                                 <div className="bg-[#1A1A1A] rounded-xl overflow-hidden border border-[#333333] hover:border-[#555555] transition-all duration-300 hover:scale-[1.02]">
                                                     <div className="relative aspect-video overflow-hidden">
-                                                        <Image
+                                                        {!imageLoadStates[project.slug] && (
+                                                            <ImageSkeleton className="absolute inset-0" aspectRatio="video" />
+                                                        )}
+                                                        <ImageWithFallback
                                                             src={firstImage}
                                                             alt={project.title}
                                                             fill
-                                                            priority
+                                                            priority={index < 4}
                                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                            fallback="/project.png"
+                                                            onLoad={() => setImageLoadStates((prev) => ({ ...prev, [project.slug]: true }))}
                                                         />
                                                         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                                     </div>

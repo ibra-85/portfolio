@@ -64,15 +64,20 @@ const Footer = ({className}: FooterProps) => {
                 </div>
               </span>
             </div>
-            <motion.button
+            <motion.a
+                href="mailto:ibraguimd@gmail.com"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="transition duration-300 rounded-[8px] ease text-white/75 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
+                className="inline-flex w-fit transition duration-300 rounded-[8px] ease text-white/90 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
+                aria-label="Envoyer un email à Ibraguim"
             >
-                📬<a href="mailto:ibraguimd@gmail.com" className="font-semibold">Me contacter</a>
-            </motion.button>
+                📬<span className="font-semibold">Me contacter</span>
+            </motion.a>
           </div>
-          <div className="text-6xl font-light text-gray-300 mt-6 md:mt-0">{currentTime}</div>
+          <div className="text-6xl font-light text-gray-200 mt-6 md:mt-0" aria-live="polite" aria-atomic="true">
+            {currentTime}
+          </div>
         </div>
 
         {/* Divider */}

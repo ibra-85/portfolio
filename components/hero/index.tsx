@@ -91,13 +91,13 @@ export function Hero() {
                 >
                     <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6 text-white">
                         Je suis Ibraguim, je donne vie au web par ma{" "}
-                        <span className="text-[#858585]">créativité et mon expertise.</span>
+                        <span className="text-gray-400">créativité et mon expertise.</span>
                     </h1>
                 </motion.div>
 
                 <motion.p
                     variants={itemVariants}
-                    className="text-lg text-[#858585] mb-8 max-w-xl"
+                    className="text-lg text-gray-300 mb-8 max-w-xl"
                 >
                     Je me spécialise dans la création de sites web modernes et réactifs,
                     en utilisant les dernières technologies front-end et back-end.
@@ -108,19 +108,17 @@ export function Hero() {
                     variants={itemVariants}
                     className="flex items-center gap-6"
                 >
-                    <motion.button
+                    <motion.a
+                        href="mailto:ibraguimd@gmail.com"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="inline-flex transition duration-300 rounded-[8px] ease text-white/75 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
+                        className="inline-flex transition duration-300 rounded-[8px] ease text-white/90 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
+                        aria-label="Envoyer un email à Ibraguim"
                     >
                         📬
-                        <a
-                            href="mailto:ibraguimd@gmail.com"
-                            className="font-semibold"
-                        >
-                            Me contacter
-                        </a>
-                    </motion.button>
+                        <span className="font-semibold">Me contacter</span>
+                    </motion.a>
                     <motion.span
                         variants={itemVariants}
                         className="text-white text-opacity-90 font-semibold"
@@ -139,7 +137,7 @@ export function Hero() {
                 <motion.div variants={itemVariants} className="mt-24 w-full">
                     <motion.h2
                         variants={itemVariants}
-                        className="text-[#858585] text-sm mb-6 font-semibold"
+                        className="text-gray-300 text-sm mb-6 font-semibold"
                     >
                         Mes compétences
                     </motion.h2>

@@ -17,6 +17,16 @@ body {
     @apply bg-background text-foreground;
   }
 
+  /* Amélioration du contraste pour accessibilité */
+  .text-gray-400 {
+    color: rgb(163 163 163); /* Amélioration du contraste */
+  }
+
+  /* Focus visible pour accessibilité */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500;
+  }
+
   /* Style pour le scrollbar (Chrome, Safari, Edge) */
   ::-webkit-scrollbar {
     @apply w-2;

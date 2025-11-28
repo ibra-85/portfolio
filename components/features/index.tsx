@@ -3,7 +3,8 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+import { ImageWithFallback } from "@/components/ImageWithFallback";
+import { ImageSkeleton } from "@/components/ImageSkeleton";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
@@ -15,20 +16,23 @@ interface ProjectFeature {
     link: string;
 }
 
-const projects: ProjectFeature[] = [
-    { title: "PDM Dashboard", category: "Dashboard", period: "2024-2025", image: "/projects/1.png", link: "/projects/pdm-dashboard" },
-    { title: "EMS Dashboard", category: "Dashboard", period: "2025", image: "/projects/2.png", link: "/projects/ems-dashboard" },
-];
+import { getProjects } from "@/data/projects";
 
-const formattedProjects = projects.map((p) => ({
-    ...p,
-    link: `/projects/${p.title.toLowerCase().replace(/\s+/g, "-")}`,
+const allProjects = getProjects();
+
+const formattedProjects: ProjectFeature[] = allProjects.slice(0, 2).map((project) => ({
+    title: project.title,
+    category: "Dashboard",
+    period: project.period,
+    image: project.sections.find((s) => s.images)?.images?.[0] ?? "/project.png",
+    link: `/projects/${project.slug}`,
 }));
 
 export function FeaturedWorks() {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
+    const [imageLoadStates, setImageLoadStates] = useState<Record<string, boolean>>({});
 
     // met à jour la visibilité des flèches
     const checkScroll = useCallback(() => {
@@ -126,7 +130,7 @@ export function FeaturedWorks() {
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-lg text-white/60">Mes projets récents</h2>
                     <motion.div initial="initial" whileHover="hover" className="inline-flex items-center gap-2">
-                        <Link href="/projects" className="flex text-[rgba(255,255,255,0.6)] hover:text-white transition-colors">
+                        <Link href="/projects" prefetch={true} className="flex text-[rgba(255,255,255,0.6)] hover:text-white transition-colors">
                             Voir
                             <motion.span
                                 variants={{ initial: { rotate: 0 }, hover: { rotate: 45 } }}
@@ -164,16 +168,22 @@ export function FeaturedWorks() {
                             >
                                 <Link
                                     href={project.link}
+                                    prefetch={true}
                                     className="group block h-full bg-[#1A1A1A] rounded-xl overflow-hidden border border-[#303030] hover:border-[#404040] transition-all"
                                 >
                                     <div className="relative aspect-video overflow-hidden">
-                                        <Image
-                                            src={project.image || "/placeholder.svg"}
+                                        {!imageLoadStates[project.title] && (
+                                            <ImageSkeleton className="absolute inset-0" aspectRatio="video" />
+                                        )}
+                                        <ImageWithFallback
+                                            src={project.image || "/project.png"}
                                             alt={project.title}
                                             fill
                                             priority={index < 2}
                                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                            fallback="/project.png"
+                                            onLoad={() => setImageLoadStates((prev) => ({ ...prev, [project.title]: true }))}
                                         />
                                     </div>
                                     <div className="p-6">

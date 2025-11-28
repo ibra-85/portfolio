@@ -25,6 +25,14 @@ export function Sidebar() {
         setDateStr(new Date().toLocaleDateString());
     }, []);
 
+    // Fonction pour vérifier si un lien est actif
+    const isActiveLink = (url: string) => {
+        if (url === "/") {
+            return pathname === "/";
+        }
+        return pathname.startsWith(url);
+    };
+
     return (
         <motion.aside
             initial={{ x: -300, opacity: 0 }}
@@ -56,10 +64,10 @@ export function Sidebar() {
                     >
                         {navItems.map((item) => (
                             <motion.li key={item.url} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-                                <Link href={item.url}>
+                                <Link href={item.url} prefetch={true}>
                                     <div
                                         className={`flex items-center gap-3 px-4 py-2 rounded-[8px] hover:bg-white/5 hover:text-white transition-colors ${
-                                            pathname === item.url ? "bg-white/5 text-white border border-white/5" : ""
+                                            isActiveLink(item.url) ? "bg-white/5 text-white border border-white/5" : ""
                                         }`}
                                     >
                                         <item.icon size={18} />
@@ -79,7 +87,7 @@ export function Sidebar() {
                             <div className="text-sm text-[#858585]">Vendée, France</div>
                         </div>
                     </div>
-                    <a href="/cv.pdf" download="cv-ibraguim" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><Download size={18} /> Mon CV</a>
+                    <a href="/cv.pdf" download="cv-ibraguim" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><Download size={18} /> Mon CV</a>
                 </div>
             </div>
         </motion.aside>

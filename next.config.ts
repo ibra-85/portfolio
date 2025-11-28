@@ -7,8 +7,8 @@ const nextConfig: NextConfig = {
         appIsrStatus: false,
     },
     images: {
-    unoptimized: true ,
-    remotePatterns: [
+        unoptimized: true, // Nécessaire avec output: 'export'
+        remotePatterns: [
         {
             protocol: 'https',
             hostname: 'www.w3.org',

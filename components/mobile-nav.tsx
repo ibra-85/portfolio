@@ -65,6 +65,7 @@ export function MobileNav() {
                                         <li key={item.url}>
                                             <Link
                                                 href={item.url}
+                                                prefetch={true}
                                                 onClick={toggleMenu} // ✅ Fermer le menu au clic
                                                 className={`flex items-center gap-3 px-4 py-2 rounded-[8px] hover:bg-white/5 hover:text-white transition-colors ${
                                                     isActiveLink(item.url) 
@@ -82,7 +83,7 @@ export function MobileNav() {
                             
                             <div className="mt-auto pt-4 border-t border-white/10">
                             
-                                <a href="/cv.pdf" download="cv-ibraguim" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><Download size={18} /> Mon CV</a>
+                                <a href="/cv.pdf" download="cv-ibraguim" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><Download size={18} /> Mon CV</a>
                             </div>
                         </div>
                     </motion.div>
