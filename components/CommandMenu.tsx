@@ -193,7 +193,7 @@ export function CommandMenu() {
                     />
                 </div>
                 <ul className="max-h-[60vh] overflow-y-auto p-2">
-                    {actions.length === 0 && <li className="px-3 py-2 text-sm text-white/50">Aucun resultat</li>}
+                    {actions.length === 0 && <li className="px-3 py-2 text-sm text-white/50">Aucun résultat</li>}
 
                     {actions.length > 0 && (
                         <li className="px-3 pb-1 pt-2 text-[11px] uppercase tracking-wider text-white/40">Actions</li>

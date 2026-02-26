@@ -17,8 +17,8 @@ export function StructuredData({ type = "website", projects }: StructuredDataPro
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Ibraguim",
-            jobTitle: "Developpeur Web",
-            description: "Developpeur web specialise en React, Next.js, TypeScript et Laravel",
+            jobTitle: "Développeur Web",
+            description: "Développeur web spécialisé en React, Next.js, TypeScript et Laravel",
             url: baseUrl,
             email: siteConfig.email,
             address: {
@@ -51,7 +51,7 @@ export function StructuredData({ type = "website", projects }: StructuredDataPro
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "Ibraguim - Portfolio",
-        description: "Portfolio de Ibraguim, developpeur web specialise en React, Next.js, TypeScript et Laravel",
+        description: "Portfolio de Ibraguim, développeur web spécialisé en React, Next.js, TypeScript et Laravel",
         url: baseUrl,
         author: {
             "@type": "Person",

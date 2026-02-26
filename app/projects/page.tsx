@@ -1,9 +1,9 @@
 ﻿"use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { Search, Calendar, ArrowUpRight } from "lucide-react";
+import { Search, Calendar, ArrowUpRight, ChevronDown, Check } from "lucide-react";
 
 import { Sidebar } from "@/components/sidebar";
 import { MobileNav } from "@/components/mobile-nav";
@@ -24,6 +24,15 @@ export default function ProjectsPage() {
     useKeyboardShortcuts();
     const [imageLoadStates, setImageLoadStates] = useState<Record<string, boolean>>({});
     const [q, setQ] = useState("");
+    const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+    const [isSkillMenuOpen, setIsSkillMenuOpen] = useState(false);
+    const [skillSearch, setSkillSearch] = useState("");
+    const skillMenuRef = useRef<HTMLDivElement>(null);
+
+    const closeSkillMenu = () => {
+        setIsSkillMenuOpen(false);
+        setSkillSearch("");
+    };
 
     useEffect(() => {
         const syncFromUrl = () => {
@@ -44,7 +53,52 @@ export default function ProjectsPage() {
         };
     }, []);
 
-    const filtered = useMemo<Project[]>(() => filterProjects(allProjects, q), [q]);
+    const availableSkills = useMemo(
+        () => Array.from(new Set(allProjects.flatMap((p) => p.skills))).sort((a, b) => a.localeCompare(b)),
+        []
+    );
+    const skillCounts = useMemo(
+        () =>
+            availableSkills.reduce<Record<string, number>>((acc, skill) => {
+                acc[skill] = allProjects.filter((p) => p.skills.includes(skill)).length;
+                return acc;
+            }, {}),
+        [availableSkills]
+    );
+
+    const filtered = useMemo<Project[]>(() => {
+        const searched = filterProjects(allProjects, q);
+        if (!selectedSkills.length) return searched;
+        return searched.filter((p) => selectedSkills.every((skill) => p.skills.includes(skill)));
+    }, [q, selectedSkills]);
+
+    const toggleSkill = (skill: string) => {
+        setSelectedSkills((prev) => (prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]));
+    };
+
+    const filteredSkills = useMemo(() => {
+        const q = skillSearch.trim().toLowerCase();
+        if (!q) return availableSkills;
+        return availableSkills.filter((s) => s.toLowerCase().includes(q));
+    }, [availableSkills, skillSearch]);
+
+    useEffect(() => {
+        const onClickOutside = (e: MouseEvent) => {
+            const target = e.target as Node;
+            if (skillMenuRef.current && !skillMenuRef.current.contains(target)) {
+                closeSkillMenu();
+            }
+        };
+        const onEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape") closeSkillMenu();
+        };
+        document.addEventListener("mousedown", onClickOutside);
+        document.addEventListener("keydown", onEscape);
+        return () => {
+            document.removeEventListener("mousedown", onClickOutside);
+            document.removeEventListener("keydown", onEscape);
+        };
+    }, []);
 
     const containerVariants: Variants = {
         hidden: { opacity: 0 },
@@ -74,12 +128,81 @@ export default function ProjectsPage() {
 
                     <motion.div variants={itemVariants} className="mb-8">
                         <h1 className="mb-2 text-3xl font-bold text-white">Mes Projets</h1>
-                        <p className="text-gray-400">Decouvrez mes realisations et projets recents</p>
+                        <p className="text-gray-400">Découvrez mes réalisations et projets récents</p>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants} className="mb-6">
+                        <div className="mb-2 flex items-center gap-2 text-sm text-white/70">
+                            <span>Filtres compétences</span>
+                            {selectedSkills.length > 0 && (
+                                <span className="rounded-full border border-white/15 bg-white/8 px-2 py-0.5 text-xs text-white/75">
+                                    {selectedSkills.length} actif{selectedSkills.length > 1 ? "s" : ""}
+                                </span>
+                            )}
+                        </div>
+                        <div className="relative max-w-sm" ref={skillMenuRef}>
+                            <button
+                                onClick={() => {
+                                    setIsSkillMenuOpen((v) => {
+                                        const next = !v;
+                                        if (!next) setSkillSearch("");
+                                        return next;
+                                    });
+                                }}
+                                className="flex w-full items-center justify-between rounded-lg border border-white/15 bg-[#1A1A1A] px-3 py-2 text-sm text-white/85 hover:border-white/30"
+                            >
+                                <span className="truncate">
+                                    {selectedSkills.length > 0
+                                        ? `${selectedSkills.length} compétence${selectedSkills.length > 1 ? "s" : ""} sélectionnée${selectedSkills.length > 1 ? "s" : ""}`
+                                        : "Sélectionner des compétences"}
+                                </span>
+                                <ChevronDown size={16} className="shrink-0 text-white/60" />
+                            </button>
+
+                            {isSkillMenuOpen && (
+                                <div className="absolute z-20 mt-2 w-full rounded-lg border border-white/12 bg-[#121212] p-2 shadow-xl">
+                                    <input
+                                        value={skillSearch}
+                                        onChange={(e) => setSkillSearch(e.target.value)}
+                                        placeholder="Rechercher une compétence..."
+                                        className="mb-2 w-full rounded-md border border-white/10 bg-[#1A1A1A] px-2 py-1.5 text-sm text-white/85 placeholder:text-white/35 focus:outline-hidden focus:border-white/25"
+                                    />
+                                    <div className="max-h-56 overflow-y-auto pr-1">
+                                        {filteredSkills.map((skill) => {
+                                            const selected = selectedSkills.includes(skill);
+                                            return (
+                                                <button
+                                                    key={skill}
+                                                    onClick={() => toggleSkill(skill)}
+                                                    className="flex w-full items-center justify-between rounded-md px-2 py-2 text-left text-sm text-white/85 hover:bg-white/6"
+                                                >
+                                                    <span>
+                                                        {skill} <span className="text-white/45">({skillCounts[skill] ?? 0})</span>
+                                                    </span>
+                                                    {selected && <Check size={14} className="text-white/75" />}
+                                                </button>
+                                            );
+                                        })}
+                                        {filteredSkills.length === 0 && (
+                                            <div className="px-2 py-2 text-sm text-white/45">Aucune compétence trouvée.</div>
+                                        )}
+                                    </div>
+                                    <div className="mt-2 border-t border-white/10 pt-2">
+                                        <button
+                                            onClick={() => setSelectedSkills([])}
+                                            className="w-full rounded-md border border-amber-200/30 bg-amber-100/10 px-2 py-1.5 text-xs text-amber-100"
+                                        >
+                                            Réinitialiser
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </motion.div>
 
                     {q && (
                         <motion.p variants={itemVariants} className="mb-6 text-sm text-gray-400">
-                            {filtered.length} projet{filtered.length > 1 ? "s" : ""} trouve
+                            {filtered.length} projet{filtered.length > 1 ? "s" : ""} trouvé
                             {filtered.length > 1 ? "s" : ""} pour &quot;{q}&quot;
                         </motion.p>
                     )}
@@ -123,6 +246,16 @@ export default function ProjectsPage() {
                                                                     <Calendar size={16} aria-hidden />
                                                                     <span>{project.period}</span>
                                                                 </div>
+                                                                <div className="mb-3 flex flex-wrap gap-1">
+                                                                    {project.skills.slice(0, 4).map((skill) => (
+                                                                        <span
+                                                                            key={skill}
+                                                                            className="rounded-full border border-white/10 bg-white/6 px-2 py-0.5 text-[11px] text-white/70"
+                                                                        >
+                                                                            {skill}
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
 
                                                                 {typeof firstDesc === "string" ? (
                                                                     <p className="line-clamp-2 text-sm text-gray-300">{firstDesc}</p>
@@ -151,8 +284,8 @@ export default function ProjectsPage() {
                                 className="py-12 text-center"
                             >
                                 <Search size={48} className="mx-auto mb-4 text-gray-400 opacity-40" aria-hidden />
-                                <p className="text-lg text-white">Aucun projet trouve</p>
-                                <p className="text-sm text-gray-400">Essaie avec d&apos;autres mots-cles</p>
+                                <p className="text-lg text-white">Aucun projet trouvé</p>
+                                <p className="text-sm text-gray-400">Essaie avec d&apos;autres mots-clés</p>
                                 <button
                                     onClick={openCommandMenu}
                                     className="mt-4 rounded-lg border border-[#333333] bg-[#1A1A1A] px-4 py-2 text-white transition-colors hover:bg-[#1b1b1b]"

@@ -102,7 +102,7 @@ export async function GithubContributionGraph() {
     } else {
         try {
             cells = await fetchContributions(username);
-            if (!cells.length) error = "Aucune contribution trouvee.";
+            if (!cells.length) error = "Aucune contribution trouvée.";
         } catch {
             error = "Impossible de charger les contributions GitHub.";
         }
@@ -128,11 +128,11 @@ export async function GithubContributionGraph() {
 
     return (
         <section className="w-full border-y border-[#292929] bg-[#121212]">
-            <div className="mx-auto w-full max-w-[1400px] px-4 py-14 lg:py-20">
+            <div className="mx-auto w-full max-w-5xl px-4 py-14 lg:py-20">
                 <div className="mb-6 flex items-center justify-between">
                     <div>
                         <h2 className="text-lg text-white/90">GitHub Contributions</h2>
-                        <p className="text-sm text-white/50">Activite sur les 12 derniers mois</p>
+                        <p className="text-sm text-white/50">Activité sur les 12 derniers mois</p>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-white/50">
                         <span>Moins</span>

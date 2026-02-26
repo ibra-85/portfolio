@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Home, LayoutGrid, Download, Search, File } from "lucide-react"
+import { Menu, X, Home, LayoutGrid, Search, File } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { Reenie_Beanie } from "next/font/google"
 import { openCommandMenu } from "@/components/CommandMenu"
@@ -40,7 +40,7 @@ export function MobileNav() {
                         <Image src="/logo.jpg" alt="Logo" width={40} height={40} className="rounded-[8px] w-10 h-10 object-cover" />
                         <div className="hidden min-[380px]:flex flex-col">
                             <h1 className={`${reenieBeanie.className} text-white text-xl leading-tight`}>Ibraguim</h1>
-                            <span className="text-sm leading-none text-[#858585]">Developpeur Web</span>
+                            <span className="text-sm leading-none text-[#858585]">Développeur Web</span>
                         </div>
                     </Link>
                     <div className="ml-auto flex min-w-0 flex-1 items-center gap-2">

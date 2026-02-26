@@ -3,7 +3,7 @@ import { Caveat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Download, File, Home, LayoutGrid, Search } from "lucide-react"
+import { File, Home, LayoutGrid, Search } from "lucide-react"
 import { motion } from "framer-motion"
 import {useEffect, useState} from "react";
 import { openCommandMenu } from "@/components/CommandMenu";

@@ -13,6 +13,7 @@ export type Project = {
     slug: string;
     title: string;
     period: string;
+    skills: string[];
     sections: ProjectSection[];
 };
 
@@ -20,6 +21,7 @@ const _projects: Omit<Project, "slug">[] = [
     {
         title: "PDM Dashboard",
         period: "2024-2025",
+        skills: ["Laravel", "Inertia", "React", "TypeScript", "Tailwind", "Spatie"],
         sections: [
             {
                 description:
@@ -84,6 +86,7 @@ const _projects: Omit<Project, "slug">[] = [
     {
         title: "EMS Dashboard",
         period: "2025",
+        skills: ["Laravel", "Inertia", "React", "TypeScript", "Tailwind", "Spatie"],
         sections: [
             {
                 description:
