@@ -23,7 +23,7 @@ const SearchInput = forwardRef<HTMLInputElement, Props>(function SearchInput(
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="w-full pl-10 pr-10 py-3 bg-[#1A1A1A] border border-[#333333] rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-[#555555] transition-colors"
+                className="w-full pl-10 pr-10 py-3 bg-[#1A1A1A] border border-[#333333] rounded-xl text-white placeholder-gray-400 focus:outline-hidden focus:border-[#555555] transition-colors"
             />
             {value && (
                 <button

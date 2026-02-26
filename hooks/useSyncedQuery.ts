@@ -11,7 +11,11 @@ export function useSyncedQuery(paramName = "q") {
     const setQuery = useCallback(
         (value: string) => {
             const next = new URLSearchParams(searchParams.toString());
-            value ? next.set(paramName, value) : next.delete(paramName);
+            if (value) {
+                next.set(paramName, value);
+            } else {
+                next.delete(paramName);
+            }
             router.replace(`${pathname}?${next.toString()}`);
         },
         [paramName, pathname, router, searchParams]

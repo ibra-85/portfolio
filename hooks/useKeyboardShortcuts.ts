@@ -1,16 +1,14 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function useKeyboardShortcuts() {
     const router = useRouter();
-    const pathname = usePathname();
     const gKeyPressed = useRef(false);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            // Ignorer si l'utilisateur est en train de taper dans un input/textarea
             if (
                 e.target instanceof HTMLInputElement ||
                 e.target instanceof HTMLTextAreaElement ||
@@ -19,21 +17,12 @@ export function useKeyboardShortcuts() {
                 return;
             }
 
-            // Raccourci "/" pour focus la recherche (sur la page projets)
-            if (e.key === "/" && pathname?.startsWith("/projects")) {
+            if (e.key === "/") {
                 e.preventDefault();
-                // Utiliser un petit délai pour s'assurer que l'input est rendu
-                setTimeout(() => {
-                    const searchInput = document.querySelector<HTMLInputElement>("#project-search");
-                    if (searchInput) {
-                        searchInput.focus();
-                        searchInput.select(); // Sélectionner le texte existant si présent
-                    }
-                }, 0);
+                window.dispatchEvent(new Event("open-command-menu"));
                 return;
             }
 
-            // Raccourci "g" puis "h" pour aller à l'accueil (vim-style)
             if (e.key === "g" && !e.ctrlKey && !e.metaKey && !gKeyPressed.current) {
                 gKeyPressed.current = true;
                 const handleSecondKey = (e2: KeyboardEvent) => {
@@ -57,6 +46,5 @@ export function useKeyboardShortcuts() {
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [router, pathname]);
+    }, [router]);
 }
-

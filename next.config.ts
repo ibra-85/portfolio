@@ -3,9 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
     output: 'export',
     trailingSlash: true,
-    devIndicators: {
-        appIsrStatus: false,
-    },
     images: {
         unoptimized: true, // Nécessaire avec output: 'export'
         remotePatterns: [

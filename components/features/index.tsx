@@ -109,8 +109,8 @@ export function FeaturedWorks() {
             {/* Background Pattern */}
             <div
                 className="absolute inset-0 z-0 pointer-events-none opacity-5 filter invert
-                   [-webkit-mask:radial-gradient(78%_88%_at_50%_50%,_rgba(0,0,0,0)_0%,_rgba(0,0,0,1)_100%)_add]
-                   [mask:radial-gradient(78%_88%_at_50%_50%,_rgba(0,0,0,0)_0%,_rgba(0,0,0,1)_100%)_add]"
+                   [-webkit-mask:radial-gradient(78%_88%_at_50%_50%,rgba(0,0,0,0)_0%,rgba(0,0,0,1)_100%)_add]
+                   [mask:radial-gradient(78%_88%_at_50%_50%,rgba(0,0,0,0)_0%,rgba(0,0,0,1)_100%)_add]"
             >
                 <div
                     style={{
@@ -164,7 +164,7 @@ export function FeaturedWorks() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.08 }}
-                                className="flex-shrink-0 w-[calc(100%-2rem)] max-w-[600px] snap-start"
+                                className="shrink-0 w-[calc(100%-2rem)] max-w-[600px] snap-start"
                             >
                                 <Link
                                     href={project.link}
@@ -210,7 +210,7 @@ export function FeaturedWorks() {
                     {canScrollLeft && (
                         <button
                             onClick={() => scroll("left")}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 flex items-center justify-center backdrop-blur-sm transition-opacity hover:bg-black/30"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 flex items-center justify-center backdrop-blur-xs transition-opacity hover:bg-black/30"
                             aria-label="Précédent"
                         >
                             <FaChevronLeft className="text-white" />
@@ -219,7 +219,7 @@ export function FeaturedWorks() {
                     {canScrollRight && (
                         <button
                             onClick={() => scroll("right")}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 flex items-center justify-center backdrop-blur-sm transition-opacity hover:bg-black/30"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 flex items-center justify-center backdrop-blur-xs transition-opacity hover:bg-black/30"
                             aria-label="Suivant"
                         >
                             <FaChevronRight className="text-white" />

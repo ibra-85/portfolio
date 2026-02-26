@@ -113,8 +113,8 @@ export function StarryBackground() {
                         }}
                     >
                         <div className="relative w-[100px] h-[2px]">
-                            <div className="absolute inset-0 bg-gradient-to-l from-white/60 to-transparent rounded-[2px]"></div>
-                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[4px] h-[1px] bg-white/20 rounded-[1px] shadow-[0_0_6px_1px_rgba(255,255,255,0.6)]"></div>
+                            <div className="absolute inset-0 bg-linear-to-l from-white/60 to-transparent rounded-[2px]"></div>
+                            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[4px] h-px bg-white/20 rounded-[1px] shadow-[0_0_6px_1px_rgba(255,255,255,0.6)]"></div>
                         </div>
                     </motion.div>
                 );

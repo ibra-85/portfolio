@@ -3,9 +3,10 @@ import { Caveat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Download, Home, LayoutGrid } from "lucide-react"
+import { Download, Home, LayoutGrid, Search } from "lucide-react"
 import { motion } from "framer-motion"
 import {useEffect, useState} from "react";
+import { openCommandMenu } from "@/components/CommandMenu";
 
 const caveat = Caveat({
     weight: "400",
@@ -55,6 +56,15 @@ export function Sidebar() {
                         <span className="text-sm leading-none">Développeur Web</span>
                     </div>
                 </Link>
+                <div className="px-2 pb-2">
+                    <button
+                        onClick={openCommandMenu}
+                        className="w-full flex items-center justify-between gap-2 rounded-[8px] border border-[#333333] bg-[#1A1A1A] px-3 py-2 text-sm text-white/80 transition hover:border-[#555555]"
+                    >
+                        <span className="flex items-center gap-2"><Search size={16} /> Search</span>
+                        <span className="text-xs text-white/60">/ or Ctrl+K</span>
+                    </button>
+                </div>
                 <nav className="flex-1 overflow-y-auto">
                     <motion.ul
                         className="space-y-1 p-2"
@@ -64,10 +74,12 @@ export function Sidebar() {
                     >
                         {navItems.map((item) => (
                             <motion.li key={item.url} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-                                <Link href={item.url} prefetch={true}>
+                                <Link href={item.url} prefetch={true} className="block">
                                     <div
-                                        className={`flex items-center gap-3 px-4 py-2 rounded-[8px] hover:bg-white/5 hover:text-white transition-colors ${
-                                            isActiveLink(item.url) ? "bg-white/5 text-white border border-white/5" : ""
+                                        className={`flex items-center gap-3 px-4 py-2 rounded-[8px] ${
+                                            isActiveLink(item.url)
+                                                ? "bg-white/8 text-white border border-white/10"
+                                                : "hover:bg-white/6 hover:text-white hover:border-white/10 border border-transparent"
                                         }`}
                                     >
                                         <item.icon size={18} />

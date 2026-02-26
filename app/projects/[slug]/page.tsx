@@ -119,7 +119,7 @@ export default async function ProjectPage(
                                                 height={1080}
                                                 className="object-cover"
                                             />
-                                            <div className="absolute top-10 right-4 bg-black/70 backdrop-blur-sm text-gray-300 px-2 py-1 rounded-[8px] text-sm font-medium flex items-center gap-1.5 pointer-events-none border border-white/10 shadow-lg">
+                                            <div className="absolute top-10 right-4 bg-black/70 backdrop-blur-xs text-gray-300 px-2 py-1 rounded-[8px] text-sm font-medium flex items-center gap-1.5 pointer-events-none border border-white/10 shadow-lg">
                                                 <ImageIcon size={14} className="text-gray-400" aria-hidden="true" />
                                                 <span>{section.images.length}</span>
                                             </div>

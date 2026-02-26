@@ -5,6 +5,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import NextTopLoader from "nextjs-toploader";
 import { SkipToContent } from "@/components/SkipToContent";
+import { CommandMenu } from "@/components/CommandMenu";
 import { siteConfig } from "@/lib/config";
 
 const geistSans = Geist({
@@ -109,6 +110,7 @@ export default function RootLayout({
             speed={200}
           />
           <StructuredData type="person" />
+          <CommandMenu />
           {children}
         </ErrorBoundary>
       </body>

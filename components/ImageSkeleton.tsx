@@ -17,7 +17,7 @@ export function ImageSkeleton({ className = "", aspectRatio = "video" }: ImageSk
     return (
         <div className={`${aspectClasses[aspectRatio]} ${className} bg-[#1A1A1A] rounded-xl overflow-hidden relative`}>
             <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A]"
+                className="absolute inset-0 bg-linear-to-r from-[#1A1A1A] via-[#252525] to-[#1A1A1A]"
                 animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}

@@ -24,7 +24,7 @@ export function BackButton() {
             whileHover={{ x: -2 }}
             aria-label="Retour"
         >
-            <RiArrowGoBackFill size={15} className="mt-[2px] flex-shrink-0" />
+            <RiArrowGoBackFill size={15} className="mt-[2px] shrink-0" />
             <span className="text-sm">Retour</span>
         </motion.button>
     );

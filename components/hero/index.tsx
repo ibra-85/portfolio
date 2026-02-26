@@ -1,5 +1,5 @@
 "use client"
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
 import { InfiniteCarousel } from "./infinite-carousel"
@@ -20,7 +20,7 @@ export function Hero() {
         return () => clearInterval(timer)
     }, [])
 
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
@@ -32,13 +32,13 @@ export function Hero() {
         },
     }
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { y: 20, opacity: 0 },
         visible: {
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring",
+                type: "spring" as const,
                 stiffness: 100,
                 damping: 10,
             },
@@ -87,7 +87,7 @@ export function Hero() {
                 {/* Hero text */}
                 <motion.div
                     variants={itemVariants}
-                    className="h-auto max-w-[440px] relative whitespace-pre-wrap w-full break-words"
+                    className="h-auto max-w-[440px] relative whitespace-pre-wrap w-full wrap-break-word"
                 >
                     <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-6 text-white">
                         Je suis Ibraguim, je donne vie au web par ma{" "}
