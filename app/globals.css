@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -17,17 +13,17 @@ body {
     @apply bg-background text-foreground;
   }
 
-  /* Amélioration du contraste pour accessibilité */
+  /* Improve contrast for accessibility */
   .text-gray-400 {
-    color: rgb(163 163 163); /* Amélioration du contraste */
+    color: rgb(163 163 163);
   }
 
-  /* Focus visible pour accessibilité */
+  /* Visible focus state */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-blue-500;
   }
 
-  /* Style pour le scrollbar (Chrome, Safari, Edge) */
+  /* Scrollbar style (Chrome, Safari, Edge) */
   ::-webkit-scrollbar {
     @apply w-2;
   }
@@ -40,7 +36,6 @@ body {
     @apply rounded-full bg-[#161616];
   }
 
-  /* Styles pour le mode sombre */
   @media (prefers-color-scheme: dark) {
     ::-webkit-scrollbar-track {
       @apply bg-[#141414];
@@ -51,4 +46,3 @@ body {
     }
   }
 }
-

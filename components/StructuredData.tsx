@@ -8,8 +8,8 @@ interface StructuredDataProps {
 
 export function StructuredData({ type = "website", projects }: StructuredDataProps) {
     const baseUrl = siteConfig.url;
-    
-    // Construire le tableau sameAs avec les réseaux sociaux disponibles
+
+    // Build sameAs array from available social links
     const sameAs = Object.values(siteConfig.social).filter(Boolean);
 
     if (type === "person") {
@@ -17,13 +17,13 @@ export function StructuredData({ type = "website", projects }: StructuredDataPro
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Ibraguim",
-            jobTitle: "Développeur Web",
-            description: "Développeur web spécialisé en React, Next.js, TypeScript et Laravel",
+            jobTitle: "Developpeur Web",
+            description: "Developpeur web specialise en React, Next.js, TypeScript et Laravel",
             url: baseUrl,
             email: siteConfig.email,
             address: {
                 "@type": "PostalAddress",
-                addressLocality: "Vendée",
+                addressLocality: "Vendee",
                 addressCountry: "FR",
             },
             sameAs,
@@ -50,8 +50,8 @@ export function StructuredData({ type = "website", projects }: StructuredDataPro
     const websiteSchema = {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        name: "Ibraguim — Portfolio",
-        description: "Portfolio de Ibraguim, développeur web spécialisé en React, Next.js, TypeScript et Laravel",
+        name: "Ibraguim - Portfolio",
+        description: "Portfolio de Ibraguim, developpeur web specialise en React, Next.js, TypeScript et Laravel",
         url: baseUrl,
         author: {
             "@type": "Person",
@@ -75,7 +75,6 @@ export function StructuredData({ type = "website", projects }: StructuredDataPro
             typeof project.sections[0]?.description === "string"
                 ? project.sections[0].description
                 : `Projet ${project.title}`,
-        dateCreated: project.period,
         url: `${baseUrl}/projects/${project.slug}`,
         creator: {
             "@type": "Person",
@@ -99,4 +98,3 @@ export function StructuredData({ type = "website", projects }: StructuredDataPro
         </>
     );
 }
-
