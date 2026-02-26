@@ -29,6 +29,7 @@ const formattedProjects: ProjectFeature[] = allProjects.slice(0, 2).map((project
 }));
 
 export function FeaturedWorks() {
+    const SCROLL_EPSILON = 8;
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
@@ -39,8 +40,9 @@ export function FeaturedWorks() {
         const el = scrollRef.current;
         if (!el) return;
         const { scrollLeft, scrollWidth, clientWidth } = el;
-        setCanScrollLeft(scrollLeft > 0);
-        setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+        const maxScrollLeft = Math.max(0, scrollWidth - clientWidth);
+        setCanScrollLeft(scrollLeft > SCROLL_EPSILON);
+        setCanScrollRight(scrollLeft < maxScrollLeft - SCROLL_EPSILON);
     }, []);
 
     useEffect(() => {
@@ -84,8 +86,14 @@ export function FeaturedWorks() {
     const scroll = (direction: "left" | "right") => {
         const el = scrollRef.current;
         if (!el) return;
-        const amount = getStride() * (direction === "left" ? -1 : 1);
-        el.scrollBy({ left: amount, behavior: "smooth" });
+        const stride = getStride();
+        const maxScrollLeft = Math.max(0, el.scrollWidth - el.clientWidth);
+        const target =
+            direction === "left"
+                ? Math.max(0, el.scrollLeft - stride)
+                : Math.min(maxScrollLeft, el.scrollLeft + stride);
+
+        el.scrollTo({ left: target, behavior: "smooth" });
     };
 
     const onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
@@ -152,7 +160,7 @@ export function FeaturedWorks() {
                         onKeyDown={onKeyDown}
                         className="
               flex gap-6 items-center
-              overflow-x-auto scrollbar-hide scroll-smooth
+              overflow-x-auto thin-scrollbar scroll-smooth
               snap-x snap-mandatory
               -mx-2 px-2
             "

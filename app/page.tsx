@@ -2,6 +2,7 @@ import { Sidebar } from "@/components/sidebar";
 import { Hero } from "@/components/hero";
 import {MobileNav} from "@/components/mobile-nav";
 import {FeaturedWorks} from "@/components/features";
+import { GithubContributionGraph } from "@/components/GithubContributionGraph";
 import Footer from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -19,6 +20,7 @@ export default function Home() {
             <ScrollToTop />
             <Hero />
             <FeaturedWorks />
+            <GithubContributionGraph />
             <Footer />
         </main>
       </div>

@@ -58,7 +58,7 @@ export function CommandMenu() {
                 section: "actions",
                 hint: "/cv.pdf",
                 icon: FileText,
-                run: () => router.push("/cv.pdf"),
+                run: () => window.open("/cv.pdf", "_blank", "noopener,noreferrer"),
             },
             {
                 id: "contact",
@@ -172,7 +172,7 @@ export function CommandMenu() {
 
     return (
         <div
-            className="fixed inset-0 z-[100] bg-black/70 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-100 bg-black/70 p-4 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
             role="dialog"
             aria-modal="true"

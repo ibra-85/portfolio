@@ -7,7 +7,7 @@ export const siteConfig = {
     email: "ibraguimd@gmail.com",
     location: "Vendée, France",
     social: {
-        github: "",
+        github: "https://github.com/ibra-85",
         linkedin: "",
         twitter: "",
     },

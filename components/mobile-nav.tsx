@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Home, LayoutGrid, Download, Search } from "lucide-react"
+import { Menu, X, Home, LayoutGrid, Download, Search, File } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { Reenie_Beanie } from "next/font/google"
 import { openCommandMenu } from "@/components/CommandMenu"
@@ -92,7 +92,7 @@ export function MobileNav() {
                             </nav>
 
                             <div className="mt-auto pt-4 border-t border-white/10">
-                                <a href="/cv.pdf" download="cv-ibraguim" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><Download size={18} /> Mon CV</a>
+                                <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><File size={18} /> Mon CV</a>
                             </div>
                         </div>
                     </motion.div>

@@ -3,7 +3,7 @@ import { Caveat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Download, Home, LayoutGrid, Search } from "lucide-react"
+import { Download, File, Home, LayoutGrid, Search } from "lucide-react"
 import { motion } from "framer-motion"
 import {useEffect, useState} from "react";
 import { openCommandMenu } from "@/components/CommandMenu";
@@ -99,7 +99,7 @@ export function Sidebar() {
                             <div className="text-sm text-[#858585]">Vendée, France</div>
                         </div>
                     </div>
-                    <a href="/cv.pdf" download="cv-ibraguim" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><Download size={18} /> Mon CV</a>
+                    <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><File size={16} /> Mon CV</a>
                 </div>
             </div>
         </motion.aside>
