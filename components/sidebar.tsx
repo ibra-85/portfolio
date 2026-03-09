@@ -3,7 +3,7 @@ import { Caveat } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { File, Home, LayoutGrid, Search } from "lucide-react"
+import { Download, Home, LayoutGrid, Search } from "lucide-react"
 import { motion } from "framer-motion"
 import {useEffect, useState} from "react";
 import { openCommandMenu } from "@/components/CommandMenu";
@@ -58,8 +58,10 @@ export function Sidebar() {
                 </Link>
                 <div className="px-2 pb-2">
                     <button
+                        type="button"
                         onClick={openCommandMenu}
-                        className="w-full flex items-center justify-between gap-2 rounded-[8px] border border-[#333333] bg-[#1A1A1A] px-3 py-2 text-sm text-white/80 transition hover:border-[#555555]"
+                        aria-label="Ouvrir le menu de commande"
+                        className="w-full flex items-center justify-between gap-2 rounded-[8px] border border-[#333333] bg-[#1A1A1A] px-3 py-2 text-sm text-white/80 transition hover:border-[#555555] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                     >
                         <span className="flex items-center gap-2"><Search size={16} /> Search</span>
                         <span className="text-xs text-white/60">/ or Ctrl+K</span>
@@ -74,7 +76,7 @@ export function Sidebar() {
                     >
                         {navItems.map((item) => (
                             <motion.li key={item.url} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-                                <Link href={item.url} prefetch={true} className="block">
+                                <Link href={item.url} prefetch={true} className="block rounded-[8px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60">
                                     <div
                                         className={`flex items-center gap-3 px-4 py-2 rounded-[8px] ${
                                             isActiveLink(item.url)
@@ -99,7 +101,7 @@ export function Sidebar() {
                             <div className="text-sm text-[#858585]">Vendée, France</div>
                         </div>
                     </div>
-                    <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px]"><File size={16} /> Mon CV</a>
+                    <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#252525] border border-dashed border-[#333333] transition-colors rounded-xl px-4 py-3 text-white text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"><Download size={16} /> Mon CV</a>
                 </div>
             </div>
         </motion.aside>

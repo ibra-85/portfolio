@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
                 protocol: "https",
                 hostname: "git-scm.com",
             },
+            {
+                protocol: "https",
+                hostname: "cdn.jsdelivr.net",
+            },
         ],
     },
 };

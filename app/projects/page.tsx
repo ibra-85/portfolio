@@ -142,6 +142,7 @@ export default function ProjectsPage() {
                         </div>
                         <div className="relative max-w-sm" ref={skillMenuRef}>
                             <button
+                                type="button"
                                 onClick={() => {
                                     setIsSkillMenuOpen((v) => {
                                         const next = !v;
@@ -149,7 +150,10 @@ export default function ProjectsPage() {
                                         return next;
                                     });
                                 }}
-                                className="flex w-full items-center justify-between rounded-lg border border-white/15 bg-[#1A1A1A] px-3 py-2 text-sm text-white/85 hover:border-white/30"
+                                aria-haspopup="listbox"
+                                aria-expanded={isSkillMenuOpen}
+                                aria-controls="skill-filter-listbox"
+                                className="flex w-full items-center justify-between rounded-lg border border-white/15 bg-[#1A1A1A] px-3 py-2 text-sm text-white/85 hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                             >
                                 <span className="truncate">
                                     {selectedSkills.length > 0
@@ -165,15 +169,19 @@ export default function ProjectsPage() {
                                         value={skillSearch}
                                         onChange={(e) => setSkillSearch(e.target.value)}
                                         placeholder="Rechercher une compétence..."
-                                        className="mb-2 w-full rounded-md border border-white/10 bg-[#1A1A1A] px-2 py-1.5 text-sm text-white/85 placeholder:text-white/35 focus:outline-hidden focus:border-white/25"
+                                        aria-label="Rechercher une compétence"
+                                        className="mb-2 w-full rounded-md border border-white/10 bg-[#1A1A1A] px-2 py-1.5 text-sm text-white/85 placeholder:text-white/35 focus-visible:outline-none focus-visible:border-white/25"
                                     />
-                                    <div className="max-h-56 overflow-y-auto pr-1">
+                                    <div id="skill-filter-listbox" role="listbox" aria-label="Compétences" className="max-h-56 overflow-y-auto pr-1">
                                         {filteredSkills.map((skill) => {
                                             const selected = selectedSkills.includes(skill);
                                             return (
                                                 <button
+                                                    type="button"
                                                     key={skill}
                                                     onClick={() => toggleSkill(skill)}
+                                                    role="option"
+                                                    aria-selected={selected}
                                                     className="flex w-full items-center justify-between rounded-md px-2 py-2 text-left text-sm text-white/85 hover:bg-white/6"
                                                 >
                                                     <span>
@@ -189,6 +197,7 @@ export default function ProjectsPage() {
                                     </div>
                                     <div className="mt-2 border-t border-white/10 pt-2">
                                         <button
+                                            type="button"
                                             onClick={() => setSelectedSkills([])}
                                             className="w-full rounded-md border border-amber-200/30 bg-amber-100/10 px-2 py-1.5 text-xs text-amber-100"
                                         >
@@ -287,8 +296,9 @@ export default function ProjectsPage() {
                                 <p className="text-lg text-white">Aucun projet trouvé</p>
                                 <p className="text-sm text-gray-400">Essaie avec d&apos;autres mots-clés</p>
                                 <button
+                                    type="button"
                                     onClick={openCommandMenu}
-                                    className="mt-4 rounded-lg border border-[#333333] bg-[#1A1A1A] px-4 py-2 text-white transition-colors hover:bg-[#1b1b1b]"
+                                    className="mt-4 rounded-lg border border-[#333333] bg-[#1A1A1A] px-4 py-2 text-white transition-colors hover:bg-[#1b1b1b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                                 >
                                     Ouvrir le Command Menu
                                 </button>

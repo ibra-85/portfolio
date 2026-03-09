@@ -189,7 +189,8 @@ export function CommandMenu() {
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Tape une commande, un projet, ou une recherche..."
-                        className="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-hidden"
+                        aria-label="Rechercher une commande ou un projet"
+                        className="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus-visible:outline-none"
                     />
                 </div>
                 <ul className="max-h-[60vh] overflow-y-auto p-2">
@@ -210,12 +211,14 @@ export function CommandMenu() {
                                     <div className="px-3 pb-1 pt-3 text-[11px] uppercase tracking-wider text-white/40">Projets</div>
                                 )}
                                 <button
+                                    type="button"
                                     onMouseEnter={() => setActiveIndex(index)}
                                     onClick={() => {
                                         if (action.disabled) return;
                                         action.run();
                                         setIsOpen(false);
                                     }}
+                                    aria-disabled={action.disabled}
                                     className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm ${
                                         action.disabled
                                             ? "cursor-not-allowed text-white/40"
