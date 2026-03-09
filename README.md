@@ -26,6 +26,19 @@ Un portfolio moderne et minimaliste construit avec **Next.js**, **TypeScript** e
 ## Variables d'environnement
 - `NEXT_PUBLIC_SITE_URL`: URL publique (ex: https://ibraguim.fr)
 
+## Scripts
+- `npm run dev`: lance le serveur de developpement
+- `npm run build`: build de production
+- `npm run start`: demarre le build
+- `npm run lint`: verifie ESLint
+- `npm run typecheck`: verifie TypeScript (`tsc --noEmit`)
+
+## Qualite et CI
+- Workflow CI GitHub Actions ajoute: lint + typecheck + build sur `push`/`pull_request`.
+- Optimisation images Next activee avec formats modernes (`avif`, `webp`).
+- Metadata dediee ajoutee pour la page `/projects` (OpenGraph/Twitter/canonical).
+- Animations adaptees a `prefers-reduced-motion` sur la home.
+
 ## Correctifs recents
 - Home "Mes Competences": logos migres vers une source stable (Devicon/jsDelivr) pour eviter les erreurs 429.
 - SEO: validation explicite en production si `NEXT_PUBLIC_SITE_URL` est absent.

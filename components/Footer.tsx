@@ -56,7 +56,7 @@ const Footer = ({className}: FooterProps) => {
                             }}
                         />
                         <div
-                            className="absolute w-[10px] h-[10px] rounded-full bg-green-400"
+                            className="absolute w-2.5 h-2.5 rounded-full bg-green-400"
                             style={{
                                 boxShadow: "0 0 10px rgba(59, 130, 246, 0.5)",
                             }}
@@ -69,13 +69,13 @@ const Footer = ({className}: FooterProps) => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex w-fit transition duration-300 rounded-[8px] ease text-white/90 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2 text-white"
+                className="inline-flex w-fit transition duration-300 rounded-[8px] ease text-white/90 hover:text-white items-center gap-2 border border-[rgba(255,255,255,0.12)] bg-[rgb(26,26,26)] hover:bg-[rgb(43,43,43)] shadow-[rgba(255,255,255,0.243)_0px_0.6px_1.08px_-0.92px_inset,rgba(255,255,255,0.235)_0px_2.29px_4.12px_-1.83px_inset,rgba(255,255,255,0.204)_0px_10px_18px_-2.75px_inset,rgba(255,255,255,0.03)_0px_0px_20px_1px] hover:shadow-[inset_0px_0.6px_1.08px_-0.92px_rgba(255,255,255,0.24479),inset_0px_2.29px_4.12px_-1.83px_rgba(255,255,255,0.2372),inset_0px_10px_18px_-2.75px_rgba(255,255,255,0.2025),0px_0px_20px_1px_rgba(255,255,255,0.03),0px_0px_0px_4px_rgba(255,255,255,0.08)] px-4 py-2"
                 aria-label="Envoyer un email à Ibraguim"
             >
                 📬<span className="font-semibold">Me contacter</span>
             </motion.a>
           </div>
-          <div className="text-6xl font-light text-gray-200 mt-6 md:mt-0" aria-live="polite" aria-atomic="true">
+          <div className="text-6xl text-gray-200 mt-6 md:mt-0" aria-live="polite" aria-atomic="true">
             {currentTime}
           </div>
         </div>

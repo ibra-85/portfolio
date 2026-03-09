@@ -1,12 +1,17 @@
 import { Sidebar } from "@/components/sidebar";
 import { Hero } from "@/components/hero";
 import {MobileNav} from "@/components/mobile-nav";
-import {FeaturedWorks} from "@/components/features";
 import { GithubContributionGraph } from "@/components/GithubContributionGraph";
 import Footer from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { getProjects } from "@/data/projects";
+import dynamic from "next/dynamic";
+
+const FeaturedWorks = dynamic(
+    () => import("@/components/features").then((m) => m.FeaturedWorks),
+    { loading: () => <section className="w-full border-y border-[#292929] py-12" aria-hidden="true" /> }
+);
 
 export default function Home() {
   const projects = getProjects();

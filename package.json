@@ -7,7 +7,8 @@
     "dev:reset": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$lock='.next/dev/lock'; Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'node.exe' -and $_.CommandLine -match 'next dev' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }; Start-Sleep -Milliseconds 300; if (Test-Path $lock) { Remove-Item $lock -Force }; next dev\"",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
