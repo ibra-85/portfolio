@@ -176,7 +176,7 @@ export function CommandMenu() {
             onClick={() => setIsOpen(false)}
             role="dialog"
             aria-modal="true"
-            aria-label="Command Menu"
+            aria-label="Menu de commande"
         >
             <div
                 className="mx-auto mt-[10vh] w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-[#121212]"

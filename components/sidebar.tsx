@@ -63,7 +63,7 @@ export function Sidebar() {
                         aria-label="Ouvrir le menu de commande"
                         className="w-full flex items-center justify-between gap-2 rounded-[8px] border border-[#333333] bg-[#1A1A1A] px-3 py-2 text-sm text-white/80 transition hover:border-[#555555] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                     >
-                        <span className="flex items-center gap-2"><Search size={16} /> Search</span>
+                        <span className="flex items-center gap-2"><Search size={16} /> Rechercher</span>
                         <span className="text-xs text-white/60">/ or Ctrl+K</span>
                     </button>
                 </div>

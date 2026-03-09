@@ -51,7 +51,7 @@ export function MobileNav() {
                             aria-label="Ouvrir la recherche"
                         >
                             <Search size={16} className="shrink-0" />
-                            <span className="truncate">Search</span>
+                            <span className="truncate">Rechercher</span>
                         </button>
                         <button
                             type="button"

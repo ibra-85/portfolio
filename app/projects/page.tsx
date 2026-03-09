@@ -300,7 +300,7 @@ export default function ProjectsPage() {
                                     onClick={openCommandMenu}
                                     className="mt-4 rounded-lg border border-[#333333] bg-[#1A1A1A] px-4 py-2 text-white transition-colors hover:bg-[#1b1b1b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
                                 >
-                                    Ouvrir le Command Menu
+                                    Ouvrir le menu de commande
                                 </button>
                             </motion.div>
                         )}

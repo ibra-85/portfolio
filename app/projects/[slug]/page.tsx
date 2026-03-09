@@ -28,28 +28,33 @@ export async function generateMetadata(
     const description =
         typeof project.sections[0]?.description === "string"
             ? project.sections[0].description
-            : `Découvrez ${project.title}, un projet développé en ${project.period}.`;
+            : `Decouvrez ${project.title}, un projet developpe en ${project.period}.`;
 
     const projectUrl = `${siteConfig.url}/projects/${slug}`;
-    
+    const firstSectionWithImages = project.sections.find((s) => s.images?.length);
+    const imageUrls = firstSectionWithImages?.images?.map((u) =>
+        u.startsWith("http") ? u : `${siteConfig.url}${u}`
+    ) ?? [`${siteConfig.url}/logo.jpg`];
+    const title = `${project.title} - Portfolio`;
+
     return {
-        title: `${project.title} – Portfolio`,
+        title,
         description,
         alternates: {
             canonical: projectUrl,
         },
         openGraph: {
-            title: `${project.title} – Portfolio`,
+            title,
             description,
             url: projectUrl,
-            images: project.sections.find((s) => s.images)?.images?.map((u) => ({ url: u })) ?? [],
+            images: imageUrls.map((url) => ({ url })),
             type: "article",
         },
         twitter: {
             card: "summary_large_image",
-            title: `${project.title} – Portfolio`,
+            title,
             description,
-            images: project.sections.find((s) => s.images)?.images?.[0] ? [project.sections.find((s) => s.images)!.images![0]] : [],
+            images: [imageUrls[0]],
         },
     };
 }

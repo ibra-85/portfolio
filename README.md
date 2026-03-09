@@ -33,3 +33,7 @@ Un portfolio moderne et minimaliste construit avec **Next.js**, **TypeScript** e
 - focus visible renforce sur les boutons/liens interactifs
 - attributs ARIA ajoutes sur la navigation mobile (etat ouvert/ferme + controles)
 - filtre de competences rendu clavier/lecteur d'ecran friendly (`aria-expanded`, `aria-controls`, `listbox`, `option`)
+- SEO pages projets: metadonnees OG/Twitter robustes (canonical + image fallback).
+- Build statique verifie: /sitemap.xml, /robots.txt, /manifest.webmanifest generes.
+- UX copy harmonisee en francais sur la navigation et les actions principales (Rechercher, menu de commande).
+- Relecture des textes pour limiter les risques d'incoherence d'encodage sur les pages principales.
