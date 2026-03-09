@@ -95,7 +95,7 @@ export function InfiniteCarousel() {
     });
 
     return (
-        <div className="overflow-hidden w-[300px]">
+        <div className="overflow-hidden w-75">
             <div className="flex" ref={containerRef} style={{ whiteSpace: "nowrap" }}>
                 <div className="flex" ref={firstCycleRef}>
                     {technologies.map((tech, i) => (
