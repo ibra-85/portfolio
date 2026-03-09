@@ -2,15 +2,15 @@
 
 Un portfolio moderne et minimaliste construit avec **Next.js**, **TypeScript** et **Tailwind CSS**.
 
-## Fonctionnalites
+## Fonctionnalités
 - App Router (Next.js 13+)
 - Pages projets avec navigation par slug
 - Animations fluides (Framer Motion)
 - Icones (lucide-react)
-- Recherche et navigation (hooks personnalises)
-- Command Menu custom (`/`, `Ctrl/Cmd+K`, `Esc`, fleches, entree)
-- GitHub Contribution Graph integre
-- Filtres de projets par competences
+- Recherche et navigation (hooks personnalisés)
+- Command Menu custom (`/`, `Ctrl/Cmd+K`, `Esc`, flèches, entrée)
+- GitHub Contribution Graph intégré
+- Filtres de projets par compétences
 
 ## Stack
 - [Next.js](https://nextjs.org/) 16
@@ -27,26 +27,35 @@ Un portfolio moderne et minimaliste construit avec **Next.js**, **TypeScript** e
 - `NEXT_PUBLIC_SITE_URL`: URL publique (ex: https://ibraguim.fr)
 
 ## Scripts
-- `npm run dev`: lance le serveur de developpement
+- `npm run dev`: lance le serveur de développement
 - `npm run build`: build de production
-- `npm run start`: demarre le build
-- `npm run lint`: verifie ESLint
-- `npm run typecheck`: verifie TypeScript (`tsc --noEmit`)
+- `npm run start`: démarre le build
+- `npm run lint`: vérifie ESLint
+- `npm run typecheck`: vérifie TypeScript (`tsc --noEmit`)
 
-## Qualite et CI
-- Workflow CI GitHub Actions ajoute: lint + typecheck + build sur `push`/`pull_request`.
-- Optimisation images Next activee avec formats modernes (`avif`, `webp`).
-- Metadata dediee ajoutee pour la page `/projects` (OpenGraph/Twitter/canonical).
-- Animations adaptees a `prefers-reduced-motion` sur la home.
+## Qualité et CI
+- Workflow CI GitHub Actions ajouté: lint + typecheck + audit prod + build sur `push`/`pull_request`.
+- Optimisation images Next activée avec formats modernes (`avif`, `webp`).
+- Metadata dédiée ajoutée pour la page `/projects` (OpenGraph/Twitter/canonical).
+- Animations adaptées à `prefers-reduced-motion` sur la home.
 
-## Correctifs recents
-- Home "Mes Competences": logos migres vers une source stable (Devicon/jsDelivr) pour eviter les erreurs 429.
+## Correctifs récents
+- Home "Mes Compétences": logos migrés vers une source stable (Devicon/jsDelivr) pour éviter les erreurs 429.
 - SEO: validation explicite en production si `NEXT_PUBLIC_SITE_URL` est absent.
-- Accessibilite:
-- focus visible renforce sur les boutons/liens interactifs
-- attributs ARIA ajoutes sur la navigation mobile (etat ouvert/ferme + controles)
-- filtre de competences rendu clavier/lecteur d'ecran friendly (`aria-expanded`, `aria-controls`, `listbox`, `option`)
-- SEO pages projets: metadonnees OG/Twitter robustes (canonical + image fallback).
-- Build statique verifie: /sitemap.xml, /robots.txt, /manifest.webmanifest generes.
-- UX copy harmonisee en francais sur la navigation et les actions principales (Rechercher, menu de commande).
-- Relecture des textes pour limiter les risques d'incoherence d'encodage sur les pages principales.
+- Accessibilité:
+- focus visible renforcé sur les boutons/liens interactifs
+- attributs ARIA ajoutés sur la navigation mobile (état ouvert/fermé + contrôles)
+- filtre de compétences rendu clavier/lecteur d'écran friendly (`aria-expanded`, `aria-controls`, `listbox`, `option`)
+- SEO pages projets: métadonnées OG/Twitter robustes (canonical + image fallback).
+- Build statique vérifié: /sitemap.xml, /robots.txt, /manifest.webmanifest générés.
+- UX copy harmonisée en français sur la navigation et les actions principales (Rechercher, menu de commande).
+- Relecture des textes pour limiter les risques d'incohérence d'encodage sur les pages principales.
+
+## Roadmap
+- Terminé:
+- Stabilisation SEO/metadata, accessibilité, filtres projets, command menu, graph GitHub.
+- Fiabilisation technique: `typecheck`, CI, build statique validé.
+- Prochaines étapes:
+- Déployer une preview finale.
+- Lancer un contrôle Lighthouse final sur URL de preview.
+- Déployer en production après validation.

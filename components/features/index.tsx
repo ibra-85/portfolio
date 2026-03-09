@@ -108,7 +108,7 @@ export function FeaturedWorks() {
             animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
             transition={shouldReduceMotion ? undefined : { duration: 0.6, ease: "easeOut" }}
             className="w-full relative overflow-hidden border-y border-[#292929]"
-            aria-label="Projets presentes"
+            aria-label="Projets présentés"
         >
             <div
                 className="absolute inset-0 z-0 pointer-events-none opacity-5 filter invert
@@ -131,7 +131,7 @@ export function FeaturedWorks() {
 
             <div className="max-w-[1400px] mx-auto px-4 py-16 lg:py-24">
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-lg text-white/60">Mes projets recents</h2>
+                    <h2 className="text-lg text-white/60">Mes projets récents</h2>
                     <motion.div initial="initial" whileHover="hover" className="inline-flex items-center gap-2">
                         <Link href="/projects" prefetch={true} aria-label="Voir tous les projets" className="flex text-[rgba(255,255,255,0.6)] hover:text-white transition-colors">
                             Voir
@@ -206,7 +206,7 @@ export function FeaturedWorks() {
                             type="button"
                             onClick={() => scroll("left")}
                             className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 flex items-center justify-center backdrop-blur-xs transition-opacity hover:bg-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                            aria-label="Precedent"
+                            aria-label="Précédent"
                         >
                             <FaChevronLeft className="text-white" />
                         </button>

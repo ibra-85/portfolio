@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
     title: "Projets",
-    description: "Decouvrez mes projets web recents realises avec React, Next.js, TypeScript et Laravel.",
+    description: "Découvrez mes projets web récents réalisés avec React, Next.js, TypeScript et Laravel.",
     alternates: {
         canonical: "/projects",
     },
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
         type: "website",
         url: "/projects",
         title: "Projets - Ibraguim",
-        description: "Decouvrez mes projets web recents realises avec React, Next.js, TypeScript et Laravel.",
+        description: "Découvrez mes projets web récents réalisés avec React, Next.js, TypeScript et Laravel.",
         images: [
             {
                 url: `${siteConfig.url}/logo.jpg`,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "Projets - Ibraguim",
-        description: "Decouvrez mes projets web recents realises avec React, Next.js, TypeScript et Laravel.",
+        description: "Découvrez mes projets web récents réalisés avec React, Next.js, TypeScript et Laravel.",
         images: [`${siteConfig.url}/logo.jpg`],
     },
 };

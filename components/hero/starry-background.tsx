@@ -26,7 +26,7 @@ export function StarryBackground({ reducedMotion = false }: { reducedMotion?: bo
     const [windowWidth, setWindowWidth] = useState(0);
 
     useEffect(() => {
-        // Le composant est monte cote client
+        // Le composant est monté côté client
         setMounted(true);
         setWindowWidth(window.innerWidth);
 
@@ -60,14 +60,14 @@ export function StarryBackground({ reducedMotion = false }: { reducedMotion?: bo
         [reducedMotion]
     );
 
-    // Tant que le composant n'est pas monte, ne rien rendre pour eviter le mismatch
+    // Tant que le composant n'est pas monté, ne rien rendre pour éviter le mismatch
     if (!mounted) {
         return null;
     }
 
     return (
         <div className="absolute inset-0 overflow-hidden">
-            {/* Etoiles statiques */}
+            {/* Étoiles statiques */}
             {stars.map((star) => (
                 <div
                     key={star.id}
@@ -82,9 +82,9 @@ export function StarryBackground({ reducedMotion = false }: { reducedMotion?: bo
                 />
             ))}
 
-            {/* Etoiles filantes */}
+            {/* Étoiles filantes */}
             {shootingStars.map((star) => {
-                // Calculer le deplacement en x et y en fonction de la largeur de la fenetre
+                // Calculer le déplacement en x et y en fonction de la largeur de la fenêtre
                 const deltaX = windowWidth;
                 const deltaY = windowWidth * Math.tan((star.angle * Math.PI) / 180);
 

@@ -28,7 +28,7 @@ export async function generateMetadata(
     const description =
         typeof project.sections[0]?.description === "string"
             ? project.sections[0].description
-            : `Decouvrez ${project.title}, un projet developpe en ${project.period}.`;
+            : `Découvrez ${project.title}, un projet développé en ${project.period}.`;
 
     const projectUrl = `${siteConfig.url}/projects/${slug}`;
     const firstSectionWithImages = project.sections.find((s) => s.images?.length);

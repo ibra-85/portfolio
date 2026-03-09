@@ -27,5 +27,8 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Audit prod deps
+        run: npm audit --omit=dev
+
       - name: Build
         run: npm run build

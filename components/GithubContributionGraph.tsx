@@ -1,4 +1,4 @@
-import { siteConfig } from "@/lib/config";
+﻿import { siteConfig } from "@/lib/config";
 
 type DayCell = {
     date: string;
@@ -39,9 +39,12 @@ function sortByDateAsc(a: DayCell, b: DayCell) {
     return 0;
 }
 
-function clampLevel(level: number) {
-    if (Number.isNaN(level)) return 0;
-    return Math.max(0, Math.min(4, level));
+function levelFromCount(count: number) {
+    if (count <= 0) return 0;
+    if (count === 1) return 1;
+    if (count <= 3) return 2;
+    if (count <= 6) return 3;
+    return 4;
 }
 
 async function fetchContributions(username: string) {
@@ -79,20 +82,22 @@ async function fetchContributions(username: string) {
         const cell = cellMatch[0];
         const dateMatch = /data-date="([^"]+)"/.exec(cell);
         if (!dateMatch) continue;
-        const levelMatch = /data-level="(\d+)"/.exec(cell);
         const idMatch = /id="([^"]+)"/.exec(cell);
         const countFromTooltip = idMatch ? tooltipCountById.get(idMatch[1]) : 0;
 
+        const count = Number(countFromTooltip ?? 0);
         days.push({
             date: dateMatch[1],
-            count: Number(countFromTooltip ?? 0),
-            level: clampLevel(Number(levelMatch?.[1] ?? 0)),
+            count,
+            level: levelFromCount(count),
         });
     }
+
     return days.sort(sortByDateAsc).slice(-DAYS - 1);
 }
 
 export async function GithubContributionGraph() {
+    const currentYear = new Date().getFullYear();
     const username = parseGithubUsername(siteConfig.social.github);
     let cells: DayCell[] = [];
     let error = "";
@@ -132,7 +137,7 @@ export async function GithubContributionGraph() {
                 <div className="mb-6 flex items-center justify-between">
                     <div>
                         <h2 className="text-lg text-white/90">GitHub Contributions</h2>
-                        <p className="text-sm text-white/50">Activité sur les 12 derniers mois</p>
+                        <p className="text-sm text-white/50">Activité de cette année ({currentYear})</p>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-white/50">
                         <span>Moins</span>
@@ -143,7 +148,20 @@ export async function GithubContributionGraph() {
                     </div>
                 </div>
 
-                {error && <p className="mb-4 text-sm text-amber-300">{error}</p>}
+                {error && (
+                    <div className="mb-4 rounded-lg border border-amber-300/30 bg-amber-200/10 p-3">
+                        <p className="text-sm text-amber-300">{error}</p>
+                        <div className="mt-3 flex items-center gap-1" aria-hidden="true">
+                            {Array.from({ length: 24 }).map((_, i) => (
+                                <span
+                                    key={i}
+                                    className="h-3 w-3 animate-pulse rounded-[3px] bg-white/10"
+                                    style={{ animationDelay: `${i * 30}ms` }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 {cells.length > 0 && (
                     <div className="thin-scrollbar mx-auto w-fit max-w-full overflow-x-auto rounded-xl border border-[#2a2a2a] bg-[#161616] p-4">
